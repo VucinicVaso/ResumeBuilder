@@ -3,10 +3,6 @@ package app.vucinicvaso.resumebuilder;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import app.vucinicvaso.resumebuilder.core.uifactory.factory.WTUIFactory;
 import app.vucinicvaso.resumebuilder.core.uifactory.factory.impl.WTUIFactoryImpl;
 import app.vucinicvaso.resumebuilder.core.uifactory.type.WTUIComponentType;
@@ -19,6 +15,16 @@ public class MainActivity extends AppCompatActivity {
 
         WTUIFactory uiFactory = new WTUIFactoryImpl();
 
+        var header = uiFactory.createHeader(WTUIComponentType.HeaderType.BASIC1);
+        header.setContext(this);
+        header.setBackAction((v) -> System.out.println("Header back action"));
+        header.setBackActionIcon(R.drawable.ic_arrow_back);
+        header.setBackActionLabel("Dashboard");
+        header.setTitle("ResumeBuilder");
+        header.setAction((v) -> System.out.println("Header action"));
+        header.setActionIcon(R.drawable.ic_arrow_forward);
+        header.setActionLabel("Action");
+
         var text = uiFactory.createText(WTUIComponentType.TextType.TEXT);
         text.setContext(this);
         text.setLabel("Click button to update this text (No XML)!");
@@ -29,15 +35,16 @@ public class MainActivity extends AppCompatActivity {
         textButton.setAction(v -> text.setLabel("Button Clicked !!!"));
 
         // Add components to Parent Layout
-        var verticalLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
-        verticalLayout.setContext(this);
-        verticalLayout.setPadding(60, 60, 60, 60);
-        verticalLayout.addComponent(text);
-        verticalLayout.addComponent(textButton);
+        var parentLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
+        parentLayout.setContext(this);
+        parentLayout.setPadding(60, 60, 60, 60);
+        parentLayout.addComponent(header);
+        parentLayout.addComponent(text);
+        parentLayout.addComponent(textButton);
 
         // Set layout as the activity content
         setContentView(
-            verticalLayout.build(),
+            parentLayout.build(),
             new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT

@@ -2,7 +2,6 @@ package app.vucinicvaso.resumebuilder.core.uifactory.component.button.text;
 
 import android.view.View;
 import android.widget.Button;
-
 import app.vucinicvaso.resumebuilder.core.uifactory.component.button.WTUIButton;
 
 public class WTUIButtonText extends WTUIButton {
