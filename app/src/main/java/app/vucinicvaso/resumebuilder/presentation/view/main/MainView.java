@@ -1,20 +1,19 @@
-package app.vucinicvaso.resumebuilder;
+package app.vucinicvaso.resumebuilder.presentation.view.main;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.ViewGroup;
-import app.vucinicvaso.resumebuilder.core.uifactory.factory.WTUIFactory;
-import app.vucinicvaso.resumebuilder.core.uifactory.factory.impl.WTUIFactoryImpl;
+import app.vucinicvaso.resumebuilder.R;
+import app.vucinicvaso.resumebuilder.core.cleanarchitecture.mvvm.view.WTView;
 import app.vucinicvaso.resumebuilder.core.uifactory.type.WTUIComponentType;
 import app.vucinicvaso.resumebuilder.core.uifactory.component.WTUIComponent;
+import app.vucinicvaso.resumebuilder.presentation.viewmodel.main.MainViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainView extends WTView<MainViewModel> {
 
-    MainActivity() {
-        uiFactory = new WTUIFactoryImpl();
+    public MainView() {
+        super();
+        setViewModel(new MainViewModel());
     }
-
-    WTUIFactory uiFactory;
 
     WTUIComponent createHeader() {
         var header = uiFactory.createHeader(WTUIComponentType.HeaderType.BASIC1);
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         textButton.setLabel("SUBMIT");
         textButton.setAction(v -> text.setLabel("Button Clicked !!!"));
 
-        return null;
+        return textButton;
     }
 
     @Override
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         var parentLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
         parentLayout.setContext(this);
-        parentLayout.setPadding(60, 60, 60, 60);
+        parentLayout.setPadding(10, 20, 10, 20);
         parentLayout.addComponent(createHeader());
         parentLayout.addComponent(createBody());
 

@@ -14,6 +14,20 @@ import app.vucinicvaso.resumebuilder.core.uifactory.component.button.text.WTUIBu
 
 public class WTUIFactoryImpl extends WTUIFactory {
 
+    private WTUIFactoryImpl() {
+        if(instance != null) {
+            throw new RuntimeException("Use getInstance() to get the single instance.");
+        }
+    }
+
+    private static WTUIFactoryImpl instance;
+    public static WTUIFactoryImpl getInstance() {
+        if(instance == null) {
+            instance = new WTUIFactoryImpl();
+        }
+        return instance;
+    }
+
     @Override
     public WTUILayout createLayout(WTUIComponentType.LayoutType type) {
         switch(type) {
@@ -60,4 +74,5 @@ public class WTUIFactoryImpl extends WTUIFactory {
                 return null;
         }
     }
+
 }
