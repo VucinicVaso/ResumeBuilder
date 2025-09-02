@@ -8,7 +8,8 @@ public class WTUIComponentType {
 
     public enum LayoutType {
         HORIZONTAL,
-        VERTICAL
+        VERTICAL,
+        VERTICAL_SCROLL
     }
 
     public enum ButtonType {
@@ -20,4 +21,3 @@ public class WTUIComponentType {
     }
 
 }
-

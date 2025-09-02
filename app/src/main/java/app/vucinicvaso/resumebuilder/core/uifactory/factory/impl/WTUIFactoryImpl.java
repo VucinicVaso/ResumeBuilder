@@ -5,6 +5,7 @@ import app.vucinicvaso.resumebuilder.core.uifactory.component.header.impl.WTUIHe
 import app.vucinicvaso.resumebuilder.core.uifactory.component.layout.WTUILayout;
 import app.vucinicvaso.resumebuilder.core.uifactory.component.layout.horizontal.WTUILayoutHorizontal;
 import app.vucinicvaso.resumebuilder.core.uifactory.component.layout.vertical.WTUILayoutVertical;
+import app.vucinicvaso.resumebuilder.core.uifactory.component.layout.verticalscroll.WTLayoutVerticalScroll;
 import app.vucinicvaso.resumebuilder.core.uifactory.factory.WTUIFactory;
 import app.vucinicvaso.resumebuilder.core.uifactory.type.WTUIComponentType;
 import app.vucinicvaso.resumebuilder.core.uifactory.component.text.WTUIText;
@@ -33,10 +34,16 @@ public class WTUIFactoryImpl extends WTUIFactory {
         switch(type) {
             case HORIZONTAL:
                 var horizontal = new WTUILayoutHorizontal();
+                horizontal.setPadding(0, 0, 0, 0);
                 return horizontal;
             case VERTICAL:
                 var vertical = new WTUILayoutVertical();
+                vertical.setPadding(0, 0, 0, 0);
                 return vertical;
+            case VERTICAL_SCROLL:
+                var verticalScroll = new WTLayoutVerticalScroll();
+                verticalScroll.setPadding(0, 0, 0, 0);
+                return verticalScroll;
             default:
                 return null;
         }

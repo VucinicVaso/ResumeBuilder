@@ -38,7 +38,11 @@ public class MainView extends WTView<MainViewModel> {
         textButton.setLabel("SUBMIT");
         textButton.setAction(v -> text.setLabel("Button Clicked !!!"));
 
-        return textButton;
+        var bodyLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL_SCROLL);
+        bodyLayout.setContext(this);
+        bodyLayout.addComponent(text);
+        bodyLayout.addComponent(textButton);
+        return bodyLayout;
     }
 
     @Override

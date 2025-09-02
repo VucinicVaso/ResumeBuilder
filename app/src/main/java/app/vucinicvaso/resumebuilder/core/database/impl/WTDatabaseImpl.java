@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import app.vucinicvaso.resumebuilder.core.database.WTDatabase;
+
 public class WTDatabaseImpl extends WTDatabase {
 
     private WTDatabaseImpl() {
