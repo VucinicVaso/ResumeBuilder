@@ -1,6 +1,7 @@
 package app.vucinicvaso.resumebuilder.core.database.impl;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import app.vucinicvaso.resumebuilder.core.database.WTDatabase;
@@ -29,6 +30,18 @@ public class WTDatabaseImpl extends WTDatabase {
     public void init() {
         DatabaseHelper dbHelper = new DatabaseHelper(context, databaseName, databaseVersion);
         db = dbHelper.getWritableDatabase();
+    }
+
+    @Override
+    public void ensureTableExists(String tableName, String createTableSql) {
+        Cursor cursor = db.rawQuery(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
+            new String[]{tableName}
+        );
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+
+        if(!exists) { db.execSQL(createTableSql); }
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {

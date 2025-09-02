@@ -22,5 +22,6 @@ public abstract class WTDatabase {
     public void setDatabaseVersion(int v) { databaseVersion = v; }
     public int getDatabaseVersion() { return databaseVersion; }
 
+    public abstract void ensureTableExists(String tableName, String createTableSql);
 
 }

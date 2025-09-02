@@ -12,7 +12,7 @@ public class MainView extends WTView<MainViewModel> {
 
     public MainView() {
         super();
-        setViewModel(new MainViewModel());
+        setViewModel(new MainViewModel(this));
     }
 
     WTUIComponent createHeader() {
