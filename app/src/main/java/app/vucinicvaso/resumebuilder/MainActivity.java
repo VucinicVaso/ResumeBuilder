@@ -6,15 +6,17 @@ import android.view.ViewGroup;
 import app.vucinicvaso.resumebuilder.core.uifactory.factory.WTUIFactory;
 import app.vucinicvaso.resumebuilder.core.uifactory.factory.impl.WTUIFactoryImpl;
 import app.vucinicvaso.resumebuilder.core.uifactory.type.WTUIComponentType;
+import app.vucinicvaso.resumebuilder.core.uifactory.component.WTUIComponent;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    MainActivity() {
+        uiFactory = new WTUIFactoryImpl();
+    }
 
-        WTUIFactory uiFactory = new WTUIFactoryImpl();
+    WTUIFactory uiFactory;
 
+    WTUIComponent createHeader() {
         var header = uiFactory.createHeader(WTUIComponentType.HeaderType.BASIC1);
         header.setContext(this);
         header.setBackAction((v) -> System.out.println("Header back action"));
@@ -24,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
         header.setAction((v) -> System.out.println("Header action"));
         header.setActionIcon(R.drawable.ic_arrow_forward);
         header.setActionLabel("Action");
+        return header;
+    }
 
+    WTUIComponent createBody() {
         var text = uiFactory.createText(WTUIComponentType.TextType.TEXT);
         text.setContext(this);
         text.setLabel("Click button to update this text (No XML)!");
@@ -34,13 +39,18 @@ public class MainActivity extends AppCompatActivity {
         textButton.setLabel("SUBMIT");
         textButton.setAction(v -> text.setLabel("Button Clicked !!!"));
 
-        // Add components to Parent Layout
+        return null;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         var parentLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
         parentLayout.setContext(this);
         parentLayout.setPadding(60, 60, 60, 60);
-        parentLayout.addComponent(header);
-        parentLayout.addComponent(text);
-        parentLayout.addComponent(textButton);
+        parentLayout.addComponent(createHeader());
+        parentLayout.addComponent(createBody());
 
         // Set layout as the activity content
         setContentView(
