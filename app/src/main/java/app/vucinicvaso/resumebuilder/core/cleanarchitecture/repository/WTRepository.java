@@ -16,7 +16,7 @@ public abstract class WTRepository<T> {
     protected final Handler handler = new Handler(Looper.getMainLooper());
 
     public interface Callback<T> {
-        void onComplete(T result);
+        void onComplete(T result) throws ClassNotFoundException;
     }
 
     protected WTDatabase db;

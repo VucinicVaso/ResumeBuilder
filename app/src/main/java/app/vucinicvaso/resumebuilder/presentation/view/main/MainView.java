@@ -1,13 +1,12 @@
 package app.vucinicvaso.resumebuilder.presentation.view.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import app.vucinicvaso.resumebuilder.R;
 import app.vucinicvaso.resumebuilder.core.cleanarchitecture.mvvm.view.WTView;
 import app.vucinicvaso.resumebuilder.core.uifactory.type.WTUIComponentType;
 import app.vucinicvaso.resumebuilder.core.uifactory.component.WTUIComponent;
-import app.vucinicvaso.resumebuilder.presentation.view.dashboard.DashboardView;
+import app.vucinicvaso.resumebuilder.presentation.bindings.router.ResumeBuilderRoutes;
 import app.vucinicvaso.resumebuilder.presentation.viewmodel.main.MainViewModel;
 
 public class MainView extends WTView<MainViewModel> {
@@ -15,18 +14,13 @@ public class MainView extends WTView<MainViewModel> {
     public MainView() {
         super();
         setViewModel(new MainViewModel());
+        new ResumeBuilderRoutes();
     }
 
     WTUIComponent createHeader() {
         var header = uiFactory.createHeader(WTUIComponentType.HeaderType.BASIC1);
         header.setContext(this);
-//        header.setBackAction((v) -> System.out.println("Header back action"));
-//        header.setBackActionIcon(R.drawable.ic_arrow_back);
-//        header.setBackActionLabel("Dashboard");
         header.setTitle("ResumeBuilder");
-//        header.setAction((v) -> System.out.println("Header action"));
-//        header.setActionIcon(R.drawable.ic_arrow_forward);
-//        header.setActionLabel("Action");
         return header;
     }
 
@@ -51,15 +45,14 @@ public class MainView extends WTView<MainViewModel> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        var parentLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
-        parentLayout.setContext(this);
-        parentLayout.setPadding(10, 20, 10, 20);
-        parentLayout.addComponent(createHeader());
-        parentLayout.addComponent(createBody());
+        var layout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
+        layout.setContext(this);
+        layout.setPadding(10, 20, 10, 20);
+        layout.addComponent(createHeader());
+        layout.addComponent(createBody());
 
-        // Set layout as the activity content
         setContentView(
-            parentLayout.build(),
+            layout.build(),
             new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT

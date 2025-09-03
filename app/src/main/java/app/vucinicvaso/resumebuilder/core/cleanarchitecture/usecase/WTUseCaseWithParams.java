@@ -5,7 +5,7 @@ import android.content.Context;
 public abstract class WTUseCaseWithParams<P, T> {
 
     public interface Callback<T> {
-        void onComplete(T result);
+        void onComplete(T result) throws ClassNotFoundException;
     }
 
     public abstract void call(Context context, P params, Callback<T> callback);

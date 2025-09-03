@@ -52,28 +52,50 @@ public class AccountRepositoryImpl extends AccountRepository {
             values.put("email",     entity.getEmail());
 
             long rowId = db.getDatabase().insert(getTableName(), null, values);
-            handler.post(() -> callback.onComplete(rowId != 0));
+            handler.post(() -> {
+                try {
+                    callback.onComplete(rowId != 0);
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         });
     }
 
     @Override
     public void update(Account entity, Callback<Boolean> callback) {
-        callback.onComplete(false);
+        try {
+            callback.onComplete(false);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void delete(Account entity, Callback<Boolean> callback) {
-        callback.onComplete(false);
+        try {
+            callback.onComplete(false);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void getById(int id, Callback<Account> callback) {
-        callback.onComplete(null);
+        try {
+            callback.onComplete(null);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void getAll(Callback<List<Account>> callback) {
-        callback.onComplete(Collections.emptyList());
+        try {
+            callback.onComplete(Collections.emptyList());
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -84,7 +106,11 @@ public class AccountRepositoryImpl extends AccountRepository {
 
             handler.post(() -> {
                 if(cursor.moveToFirst()) {
-                    callback.onComplete(cursor.getInt(0) > 0);
+                    try {
+                        callback.onComplete(cursor.getInt(0) > 0);
+                    } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
                 cursor.close();
             });

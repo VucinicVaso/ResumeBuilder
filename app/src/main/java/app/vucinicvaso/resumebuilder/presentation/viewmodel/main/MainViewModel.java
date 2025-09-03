@@ -1,17 +1,17 @@
 package app.vucinicvaso.resumebuilder.presentation.viewmodel.main;
 
 import android.content.Context;
-import android.content.Intent;
 import app.vucinicvaso.resumebuilder.core.cleanarchitecture.mvvm.viewmodel.WTViewModel;
+import app.vucinicvaso.resumebuilder.core.router.WTRouter;
+import app.vucinicvaso.resumebuilder.core.router.impl.WTRouterImpl;
 import app.vucinicvaso.resumebuilder.domain.entity.account.Account;
 import app.vucinicvaso.resumebuilder.domain.usecase.account.AccountExistsUseCase;
 import app.vucinicvaso.resumebuilder.domain.usecase.account.AccountCreateUseCase;
 import app.vucinicvaso.resumebuilder.domain.usecase.account.AccountCreateUseCaseParams;
-import app.vucinicvaso.resumebuilder.presentation.view.dashboard.DashboardView;
 
 public class MainViewModel extends WTViewModel {
 
-    public MainViewModel() { }
+    public MainViewModel() {}
 
     public void init(Context context) {
         new AccountExistsUseCase().call(context, response -> {
@@ -29,9 +29,9 @@ public class MainViewModel extends WTViewModel {
         });
     }
 
-    public void redirect(Context context) {
-        Intent intent = new Intent(context, DashboardView.class);
-        context.startActivity(intent);
+    public void redirect(Context context) throws ClassNotFoundException {
+        WTRouter router = WTRouterImpl.getInstance();
+        router.navigateTo(context, "dashboard");
     }
 
 }
