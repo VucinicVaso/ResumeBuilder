@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ResumeBuilder"
         tools:targetApi="31">
 
-        <!-- MainActivity(MainView) -->
+        <!-- MainView (MainActivity) -->
         <activity
             android:name="app.vucinicvaso.resumebuilder.presentation.view.main.MainView"
             android:exported="true"
@@ -24,6 +24,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- DashboardView -->
+        <activity
+            android:name="app.vucinicvaso.resumebuilder.presentation.view.dashboard.DashboardView"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ResumeBuilder">
+                <!-- -->
         </activity>
 
     </application>

@@ -1,44 +1,42 @@
-package app.vucinicvaso.resumebuilder.presentation.view.main;
+package app.vucinicvaso.resumebuilder.presentation.view.dashboard;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import app.vucinicvaso.resumebuilder.R;
 import app.vucinicvaso.resumebuilder.core.cleanarchitecture.mvvm.view.WTView;
 import app.vucinicvaso.resumebuilder.core.uifactory.type.WTUIComponentType;
 import app.vucinicvaso.resumebuilder.core.uifactory.component.WTUIComponent;
-import app.vucinicvaso.resumebuilder.presentation.view.dashboard.DashboardView;
-import app.vucinicvaso.resumebuilder.presentation.viewmodel.main.MainViewModel;
+import app.vucinicvaso.resumebuilder.presentation.viewmodel.dashboard.DashboardViewModel;
 
-public class MainView extends WTView<MainViewModel> {
+public class DashboardView extends WTView<DashboardViewModel> {
 
-    public MainView() {
+    public DashboardView() {
         super();
-        setViewModel(new MainViewModel());
+        setViewModel(new DashboardViewModel());
     }
 
     WTUIComponent createHeader() {
         var header = uiFactory.createHeader(WTUIComponentType.HeaderType.BASIC1);
         header.setContext(this);
-//        header.setBackAction((v) -> System.out.println("Header back action"));
-//        header.setBackActionIcon(R.drawable.ic_arrow_back);
-//        header.setBackActionLabel("Dashboard");
-        header.setTitle("ResumeBuilder");
-//        header.setAction((v) -> System.out.println("Header action"));
-//        header.setActionIcon(R.drawable.ic_arrow_forward);
-//        header.setActionLabel("Action");
+        header.setBackAction((v) -> finish());
+        header.setBackActionIcon(R.drawable.ic_arrow_back);
+        header.setBackActionLabel("Go Back");
+        header.setTitle("Dashboard");
+        header.setAction((v) -> System.out.println("Action !!!"));
+        header.setActionIcon(R.drawable.ic_arrow_forward);
+        header.setActionLabel("Action");
         return header;
     }
 
     WTUIComponent createBody() {
         var text = uiFactory.createText(WTUIComponentType.TextType.TEXT);
         text.setContext(this);
-        text.setLabel("Click SUBMIT button to get started");
+        text.setLabel("Click button to say HELLO !!!");
 
         var textButton = uiFactory.createButton(WTUIComponentType.ButtonType.TEXT);
         textButton.setContext(this);
         textButton.setLabel("SUBMIT");
-        textButton.setAction(v -> viewModel.init(this));
+        textButton.setAction(v -> text.setLabel("Hello to you to !!!"));
 
         var bodyLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL_SCROLL);
         bodyLayout.setContext(this);

@@ -1,7 +1,13 @@
 package app.vucinicvaso.resumebuilder.core.cleanarchitecture.usecase;
 
-public abstract class WTUseCaseWithParams<T, P> {
+import android.content.Context;
 
-    public abstract T call(P params);
+public abstract class WTUseCaseWithParams<P, T> {
+
+    public interface Callback<T> {
+        void onComplete(T result);
+    }
+
+    public abstract void call(Context context, P params, Callback<T> callback);
 
 }

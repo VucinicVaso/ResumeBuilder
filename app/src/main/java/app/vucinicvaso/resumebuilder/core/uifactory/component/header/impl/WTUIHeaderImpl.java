@@ -57,9 +57,9 @@ public class WTUIHeaderImpl extends WTUIHeader {
         rootLayout.setPadding(4, 16, 4, 16);
         rootLayout.setGravity(android.view.Gravity.CENTER_VERTICAL);
 
-        rootLayout.addView(createBackActionComponent());
-        rootLayout.addView(createTitleComponent());
-        rootLayout.addView(createActionComponent());
+        if(backActionIcon != 0 || backActionLabel != null) rootLayout.addView(createBackActionComponent());
+        if(title != null) rootLayout.addView(createTitleComponent());
+        if(actionIcon != 0 || actionLabel != null) rootLayout.addView(createActionComponent());
         return rootLayout;
     }
 

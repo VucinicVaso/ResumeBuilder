@@ -8,32 +8,25 @@ import app.vucinicvaso.resumebuilder.core.database.WTDatabase;
 
 public class WTDatabaseImpl extends WTDatabase {
 
-    private WTDatabaseImpl() {
-        if (instance != null) {
+    private WTDatabaseImpl(Context context) {
+        super(context, "WT_RESUME_BUILDER_DB", null, 1);
+        
+        if(instance != null) {
             throw new RuntimeException("Use getInstance() to get the single instance.");
         }
     }
 
-    private static WTDatabase instance;
-    public static WTDatabase getInstance(Context context) {
+    public static synchronized WTDatabase getInstance(Context context) {
         if(instance == null) {
-            instance = new WTDatabaseImpl();
-            instance.setContext(context);
-            instance.setDatabaseName("resume_builder_db");
-            instance.setDatabaseVersion(1);
-            instance.init();
+            instance = new WTDatabaseImpl(context.getApplicationContext());
+
         }
         return instance;
     }
 
     @Override
-    public void init() {
-        DatabaseHelper dbHelper = new DatabaseHelper(context, databaseName, databaseVersion);
-        db = dbHelper.getWritableDatabase();
-    }
-
-    @Override
     public void ensureTableExists(String tableName, String createTableSql) {
+        final SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
             "SELECT name FROM sqlite_master WHERE type='table' AND name=?",
             new String[]{tableName}
@@ -41,23 +34,9 @@ public class WTDatabaseImpl extends WTDatabase {
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
 
-        if(!exists) { db.execSQL(createTableSql); }
-    }
-
-    private static class DatabaseHelper extends SQLiteOpenHelper {
-
-        DatabaseHelper(Context context, String DATABASE_NAME, int DATABASE_VERSION) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        if(!exists) {
+            db.execSQL(createTableSql);
         }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {}
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            onCreate(db);
-        }
-
     }
 
 }

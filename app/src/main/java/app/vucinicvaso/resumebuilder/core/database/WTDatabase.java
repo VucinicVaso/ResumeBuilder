@@ -2,17 +2,32 @@ package app.vucinicvaso.resumebuilder.core.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-public abstract class WTDatabase {
+public abstract class WTDatabase extends SQLiteOpenHelper {
 
-    public abstract void init();
+    protected static WTDatabase instance;
+
+    public WTDatabase(Context context, String name, Object o, int version) {
+        super(context, name, null, version);
+        setDatabaseName(name);
+        setDatabaseVersion(version);
+        setDatabase();
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        // create tables
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // upgrade logic
+    }
 
     protected SQLiteDatabase db;
+    public void setDatabase() { db = this.getReadableDatabase(); }
     public SQLiteDatabase getDatabase() { return db; }
-
-    protected Context context;
-    public void setContext(Context v) { context = v; }
-    public Context getContext() { return context; }
 
     protected String databaseName;
     public void setDatabaseName(String v) { databaseName = v; }

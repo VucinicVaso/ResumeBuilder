@@ -1,9 +1,10 @@
 package app.vucinicvaso.resumebuilder.data.repository.account;
 
-import android.content.ContentValues;
-import android.content.Context;
-import java.util.Collections;
 import java.util.List;
+import java.util.Collections;
+import android.database.Cursor;
+import android.content.Context;
+import android.content.ContentValues;
 import app.vucinicvaso.resumebuilder.core.database.impl.WTDatabaseImpl;
 import app.vucinicvaso.resumebuilder.domain.entity.account.Account;
 import app.vucinicvaso.resumebuilder.domain.repository.account.AccountRepository;
@@ -19,15 +20,15 @@ public class AccountRepositoryImpl extends AccountRepository {
     public static AccountRepository getInstance(Context context) {
         if(instance == null) {
             instance = new AccountRepositoryImpl();
+            instance.init(context);
         }
-        instance.init(context);
         return instance;
     }
 
     @Override
     public void init(Context context) {
         setTableName("WT_TABLE_ACCOUNT");
-        db = WTDatabaseImpl.getInstance(null);
+        db = WTDatabaseImpl.getInstance(context);
 
         if(db.getDatabase().isOpen()) {
             final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + getTableName() + " ( " +
@@ -53,8 +54,6 @@ public class AccountRepositoryImpl extends AccountRepository {
             long rowId = db.getDatabase().insert(getTableName(), null, values);
             handler.post(() -> callback.onComplete(rowId != 0));
         });
-
-        callback.onComplete(false);
     }
 
     @Override
@@ -75,6 +74,21 @@ public class AccountRepositoryImpl extends AccountRepository {
     @Override
     public void getAll(Callback<List<Account>> callback) {
         callback.onComplete(Collections.emptyList());
+    }
+
+    @Override
+    public void exists(Callback<Boolean> callback) {
+        executorService.execute(() -> {
+            final String query = "SELECT COUNT(*) FROM " + getTableName() + " WHERE id = 1;";
+            final Cursor cursor = db.getDatabase().rawQuery(query, null);
+
+            handler.post(() -> {
+                if(cursor.moveToFirst()) {
+                    callback.onComplete(cursor.getInt(0) > 0);
+                }
+                cursor.close();
+            });
+        });
     }
 
 }

@@ -6,7 +6,7 @@ import app.vucinicvaso.resumebuilder.core.uifactory.component.WTUIComponent;
 
 public abstract class WTUIHeader extends WTUIComponent {
 
-    protected int backActionIcon;
+    protected int backActionIcon = 0;
     protected String backActionLabel;
     protected View.OnClickListener backAction;
     public void setBackActionIcon(int v) { backActionIcon = v; }
@@ -16,7 +16,7 @@ public abstract class WTUIHeader extends WTUIComponent {
     protected String title;
     public void setTitle(String v) { title = v; }
 
-    protected int actionIcon;
+    protected int actionIcon = 0;
     protected String actionLabel;
     protected View.OnClickListener action;
     public void setActionIcon(int v) { actionIcon = v; }
