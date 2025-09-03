@@ -49,15 +49,14 @@ public class DashboardView extends WTView<DashboardViewModel> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        var parentLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
-        parentLayout.setContext(this);
-        parentLayout.setPadding(10, 20, 10, 20);
-        parentLayout.addComponent(createHeader());
-        parentLayout.addComponent(createBody());
+        var layout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
+        layout.setContext(this);
+        layout.setPadding(10, 20, 10, 20);
+        layout.addComponent(createHeader());
+        layout.addComponent(createBody());
 
-        // Set layout as the activity content
         setContentView(
-            parentLayout.build(),
+            layout.build(),
             new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
