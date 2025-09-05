@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name="app.vucinicvaso.resumebuilder.ResumeBuilderApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +18,7 @@
         <activity
             android:name="app.vucinicvaso.resumebuilder.presentation.view.main.MainView"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="main"
             android:theme="@style/Theme.ResumeBuilder">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +31,7 @@
         <activity
             android:name="app.vucinicvaso.resumebuilder.presentation.view.dashboard.DashboardView"
             android:exported="true"
-            android:label="Dashboard"
+            android:label="dashboard"
             android:theme="@style/Theme.ResumeBuilder">
                 <!-- -->
         </activity>

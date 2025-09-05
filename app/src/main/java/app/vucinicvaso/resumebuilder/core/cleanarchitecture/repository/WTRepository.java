@@ -19,7 +19,7 @@ public abstract class WTRepository<T> {
         void onComplete(T result) throws ClassNotFoundException;
     }
 
-    protected WTDatabase db;
+    protected WTDatabase database;
 
     protected String tableName;
     public void setTableName(String v) { tableName = v; }

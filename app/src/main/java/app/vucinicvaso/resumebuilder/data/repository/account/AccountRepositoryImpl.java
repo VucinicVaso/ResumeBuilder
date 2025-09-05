@@ -28,9 +28,9 @@ public class AccountRepositoryImpl extends AccountRepository {
     @Override
     public void init(Context context) {
         setTableName("WT_TABLE_ACCOUNT");
-        db = WTDatabaseImpl.getInstance(context);
+        database = WTDatabaseImpl.getInstance(context);
 
-        if(db.getDatabase().isOpen()) {
+        if(database.getDatabase().isOpen()) {
             final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + getTableName() + " ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " date TEXT, " +
@@ -38,7 +38,7 @@ public class AccountRepositoryImpl extends AccountRepository {
                 " lastname TEXT, " +
                 " email TEXT " +
             ");";
-            db.ensureTableExists(getTableName(), CREATE_TABLE);
+            database.ensureTableExists(getTableName(), CREATE_TABLE);
         }
     }
 
@@ -51,7 +51,7 @@ public class AccountRepositoryImpl extends AccountRepository {
             values.put("lastname",  entity.getLastname());
             values.put("email",     entity.getEmail());
 
-            long rowId = db.getDatabase().insert(getTableName(), null, values);
+            long rowId = database.getDatabase().insert(getTableName(), null, values);
             handler.post(() -> {
                 try {
                     callback.onComplete(rowId != 0);
@@ -102,7 +102,7 @@ public class AccountRepositoryImpl extends AccountRepository {
     public void exists(Callback<Boolean> callback) {
         executorService.execute(() -> {
             final String query = "SELECT COUNT(*) FROM " + getTableName() + " WHERE id = 1;";
-            final Cursor cursor = db.getDatabase().rawQuery(query, null);
+            final Cursor cursor = database.getDatabase().rawQuery(query, null);
 
             handler.post(() -> {
                 if(cursor.moveToFirst()) {

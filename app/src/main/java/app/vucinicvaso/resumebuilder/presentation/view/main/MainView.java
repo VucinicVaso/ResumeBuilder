@@ -6,7 +6,6 @@ import app.vucinicvaso.resumebuilder.R;
 import app.vucinicvaso.resumebuilder.core.cleanarchitecture.mvvm.view.WTView;
 import app.vucinicvaso.resumebuilder.core.uifactory.type.WTUIComponentType;
 import app.vucinicvaso.resumebuilder.core.uifactory.component.WTUIComponent;
-import app.vucinicvaso.resumebuilder.presentation.bindings.router.ResumeBuilderRoutes;
 import app.vucinicvaso.resumebuilder.presentation.viewmodel.main.MainViewModel;
 
 public class MainView extends WTView<MainViewModel> {
@@ -14,7 +13,6 @@ public class MainView extends WTView<MainViewModel> {
     public MainView() {
         super();
         setViewModel(new MainViewModel());
-        new ResumeBuilderRoutes();
     }
 
     WTUIComponent createHeader() {
