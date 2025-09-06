@@ -1,22 +1,29 @@
 ResumeBuilder – Native Android App
 
-ResumeBuilder je native Android aplikacija razvijena u Javi, koja korisnicima omogućava brzo i jednostavno kreiranje profesionalnih CV-ova (resume-a) direktno na mobilnom telefonu.
+ResumeBuilder is a native Android application developed in Java, designed to help users quickly and easily create professional CVs (resumes) directly on their mobile phones.
 
-🚀 Funkcionalnosti
+🚀 Features
 
-    - Kreiranje i uređivanje resume-a – unos osnovnih podataka, obrazovanja, radnog iskustva i vještina.
-    - Lokalna baza podataka (SQLite) – čuvanje i upravljanje podacima o korisnicima i njihovim CV-ovima.
-    - Router – jednostavna navigacija između ekrana unutar aplikacije.
-    - Component Factory – modularna i skalabilna izrada komponenti za lakše održavanje i proširivanje aplikacije.
-    - Clean Architecture – jasno razdvajanje slojeva (data, domain, presentation) radi bolje organizacije, testabilnosti i održivosti koda.
+    - Create and edit resumes – input of personal information, education, work experience, and skills.
 
-🛠️ Tehnologije i arhitektura
+    - Local database (SQLite) – storing and managing user data and their CVs.
 
-    - Jezik: Java
-    - Baza podataka: SQLite
-    - Arhitektura: modularni pristup sa Router-om i Component Factory-em
+    - Router – simple navigation between screens within the app.
 
-📱 Platforma
+    - Component Factory – modular and scalable component development for easier maintenance and extension of the app.
+
+    - Clean Architecture – clear separation of layers (data, domain, presentation) for better organization, testability, and code sustainability.
+
+🛠️ Technologies and Architecture
+
+    - Language: Java
+
+    - Database: SQLite
+
+    - Architecture: modular approach with Router and Component Factory
+
+📱 Platform
 
     - Android (Native Java)
-    - Minimalna verzija Androida: (Android ?.? – API ??)
+
+    - Minimum Android version: (Android ?.? – API ??)
