@@ -12,7 +12,8 @@ public class AccountMapper extends WTObjectMapper<Account, AccountModel> {
             model.getDate(),
             model.getFirstname(),
             model.getLastname(),
-            model.getEmail()
+            model.getEmail(),
+            model.getSelected()
         );
     }
 
@@ -23,7 +24,8 @@ public class AccountMapper extends WTObjectMapper<Account, AccountModel> {
             entity.getDate(),
             entity.getFirstname(),
             entity.getLastname(),
-            entity.getEmail()
+            entity.getEmail(),
+            entity.getSelected()
         );
     }
 
