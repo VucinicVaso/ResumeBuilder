@@ -1,4 +1,5 @@
 package app.vucinicvaso.resumebuilder.core.cleanarchitecture.mvvm.viewmodel;
+
 import android.content.Context;
 import app.vucinicvaso.resumebuilder.core.router.impl.WTRouterImpl;
 
