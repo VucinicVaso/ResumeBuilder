@@ -32,11 +32,12 @@ public class AccountRepositoryImpl extends AccountRepository {
 
         if(database.getDatabase().isOpen()) {
             final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + getTableName() + " ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " date TEXT, " +
                 " firstname TEXT, " +
                 " lastname TEXT, " +
                 " email TEXT " +
+                " selected BOOLEAN " +
             ");";
             database.ensureTableExists(getTableName(), CREATE_TABLE);
         }
@@ -50,6 +51,7 @@ public class AccountRepositoryImpl extends AccountRepository {
             values.put("firstname", entity.getFirstname());
             values.put("lastname",  entity.getLastname());
             values.put("email",     entity.getEmail());
+            values.put("selected",  entity.getSelected() ? 1 : 0);
 
             long rowId = database.getDatabase().insert(getTableName(), null, values);
             handler.post(() -> {
@@ -109,6 +111,34 @@ public class AccountRepositoryImpl extends AccountRepository {
                     try {
                         callback.onComplete(cursor.getInt(0) > 0);
                     } catch (ClassNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                cursor.close();
+            });
+        });
+    }
+
+    @Override
+    public void getSelected(Callback<Account> callback) {
+        executorService.execute(() -> {
+            final String query = "SELECT * FROM " + getTableName() + " WHERE selected = 1 LIMIT 1;";
+            final Cursor cursor = database.getDatabase().rawQuery(query, null);
+
+            handler.post(() -> {
+                if(cursor.moveToFirst()) {
+                    try {
+                        Account entity = new Account();
+                        entity.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+                        entity.setDate(cursor.getString(cursor.getColumnIndexOrThrow("date")));
+                        entity.setDate(cursor.getString(cursor.getColumnIndexOrThrow("date")));
+                        entity.setFirstname(cursor.getString(cursor.getColumnIndexOrThrow("firstname")));
+                        entity.setLastname(cursor.getString(cursor.getColumnIndexOrThrow("lastname")));
+                        entity.setEmail(cursor.getString(cursor.getColumnIndexOrThrow("email")));
+                        entity.setSelected(cursor.getInt(cursor.getColumnIndexOrThrow("selected")) == 1);
+
+                        callback.onComplete(entity);
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 }

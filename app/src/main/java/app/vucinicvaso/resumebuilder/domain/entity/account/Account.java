@@ -4,6 +4,10 @@ import app.vucinicvaso.resumebuilder.core.cleanarchitecture.entity.WTEntity;
 
 public class Account extends WTEntity<Account> {
 
+    public Account() {
+        super(0, "");
+    }
+
     public Account(int id, String date, String firstname, String lastname, String email, boolean selected) {
         super(id, date);
         setFirstname(firstname);

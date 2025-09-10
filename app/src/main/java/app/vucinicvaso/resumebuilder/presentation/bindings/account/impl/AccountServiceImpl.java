@@ -40,7 +40,7 @@ public class AccountServiceImpl extends AccountService {
 
     @Override
     public void signUp(Context context, Callback<Boolean> callback) {
-        Account account = new Account(0, "", "", "", "");
+        Account account = new Account(0, "", "", "", "", true);
 
         new AccountCreateUseCase().call(
             context,

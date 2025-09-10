@@ -11,4 +11,6 @@ public abstract class AccountRepository extends WTRepository<Account> {
 
     public abstract void exists(Callback<Boolean> callback);
 
+    public abstract void getSelected(Callback<Account> callback);
+
 }
