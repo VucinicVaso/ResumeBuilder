@@ -8,7 +8,7 @@ public abstract class AccountService extends WTService<AccountService> {
 
     protected static AccountService instance;
 
-    Account account;
+    public Account account;
 
     public abstract void exists(Context context, Callback<Boolean> callback);
 

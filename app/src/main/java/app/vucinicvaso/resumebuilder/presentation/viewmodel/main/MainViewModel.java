@@ -17,18 +17,28 @@ public class MainViewModel extends WTViewModel {
         accountService.exists(
             context,
             response -> {
-                if(response) { navigateTo(context, "dashboard"); }
-                if(!response) { createAccount(context); }
+                if(response) { signIn(context); }
+                if(!response) { signUp(context); }
             }
         );
     }
 
-    public void createAccount(Context context) {
-        accountService.signUp(
+    public void signIn(Context context) {
+        accountService.signIn(
             context,
             response -> {
                 if(response) { navigateTo(context, "dashboard"); }
-                if(!response) { System.out.println("MainViewModel.createAccount(): Failed to create new account"); }
+                if(!response) { System.out.println("MainViewModel.signIn(): Failed to signIn."); }
+            }
+        );
+    }
+
+    public void signUp(Context context) {
+        accountService.signUp(
+            context,
+            response -> {
+                if(response) { signIn(context); }
+                if(!response) { System.out.println("MainViewModel.signUp(): Failed to signUp."); }
             }
         );
     }

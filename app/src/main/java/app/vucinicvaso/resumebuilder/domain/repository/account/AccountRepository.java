@@ -7,8 +7,6 @@ public abstract class AccountRepository extends WTRepository<Account> {
 
     protected static AccountRepository instance;
 
-    public Account account;
-
     public abstract void exists(Callback<Boolean> callback);
 
     public abstract void getSelected(Callback<Account> callback);
