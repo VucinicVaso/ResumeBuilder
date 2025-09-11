@@ -36,13 +36,17 @@ public class DashboardView extends WTView<DashboardViewModel> {
         var textButton = uiFactory.createButton(WTUIComponentType.ButtonType.TEXT);
         textButton.setContext(this);
         textButton.setLabel("SUBMIT");
-        textButton.setAction(v -> text.setLabel("Hello to you to !!!"));
+        textButton.setAction(v -> text.setLabel("Hello to you too !!!"));
 
         var bodyLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL_SCROLL);
         bodyLayout.setContext(this);
         bodyLayout.addComponent(text);
-        bodyLayout.addComponent(textButton);
-        return bodyLayout;
+
+        var layout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
+        layout.setContext(this);
+        layout.addComponent(bodyLayout);
+        layout.addComponent(textButton);
+        return layout;
     }
 
     @Override

@@ -131,7 +131,6 @@ public class AccountRepositoryImpl extends AccountRepository {
                         Account entity = new Account();
                         entity.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
                         entity.setDate(cursor.getString(cursor.getColumnIndexOrThrow("date")));
-                        entity.setDate(cursor.getString(cursor.getColumnIndexOrThrow("date")));
                         entity.setFirstname(cursor.getString(cursor.getColumnIndexOrThrow("firstname")));
                         entity.setLastname(cursor.getString(cursor.getColumnIndexOrThrow("lastname")));
                         entity.setEmail(cursor.getString(cursor.getColumnIndexOrThrow("email")));

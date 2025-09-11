@@ -11,9 +11,16 @@ public class WTUILayoutHorizontal extends WTUILayout {
     public View build() {
         LinearLayout layout = new LinearLayout(getContext());
         layout.setOrientation(LinearLayout.HORIZONTAL);
-        layout.setPadding(padding.get("left"), padding.get("top"), padding.get("right"), padding.get("bottom"));
-        for(WTUIComponent c : components) {
-            layout.addView(c.build());
+        layout.setPadding(
+            padding.get("left"),
+            padding.get("top"),
+            padding.get("right"),
+            padding.get("bottom")
+        );
+        if(!components.isEmpty()) {
+            for(WTUIComponent c : components) {
+                layout.addView(c.build());
+            }
         }
         return layout;
     }

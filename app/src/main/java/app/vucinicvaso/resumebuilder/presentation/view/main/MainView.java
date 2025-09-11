@@ -23,20 +23,19 @@ public class MainView extends WTView<MainViewModel> {
     }
 
     WTUIComponent createBody() {
-        var text = uiFactory.createText(WTUIComponentType.TextType.TEXT);
-        text.setContext(this);
-        text.setLabel("Click SUBMIT button to get started");
-
-        var textButton = uiFactory.createButton(WTUIComponentType.ButtonType.TEXT);
-        textButton.setContext(this);
-        textButton.setLabel("SUBMIT");
-        textButton.setAction(v -> viewModel.init(this));
-
         var bodyLayout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL_SCROLL);
         bodyLayout.setContext(this);
-        bodyLayout.addComponent(text);
-        bodyLayout.addComponent(textButton);
-        return bodyLayout;
+
+        var continueButton = uiFactory.createButton(WTUIComponentType.ButtonType.TEXT);
+        continueButton.setContext(this);
+        continueButton.setLabel("CONTINUE");
+        continueButton.setAction(v -> viewModel.init(this));
+
+        var layout = uiFactory.createLayout(WTUIComponentType.LayoutType.VERTICAL);
+        layout.setContext(this);
+        layout.addComponent(bodyLayout);
+        layout.addComponent(continueButton);
+        return layout;
     }
 
     @Override
